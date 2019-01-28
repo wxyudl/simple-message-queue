@@ -1,11 +1,11 @@
 function Queue () {
     // Topic 集合
-    var topics = {};
+    let topics = {};
     
     // 保存待消费的 Topic，先发布后订阅
-    var queue = {};
+    let queue = {};
     
-    function subscribe (topic, callback) {
+    let subscribe = (topic, callback) => {
         // 如果 Queue 中存在待消费的 Topic，先消费 Queue
         if (queue[topic]) {
             for (args of queue[topic]) {
@@ -19,7 +19,7 @@ function Queue () {
         topics[topic] = callback;
     }
     
-    function publish (topic, ...args) {
+    let publish = (topic, ...args) => {
         if (topics[topic]) {
             topics[topic](...args);
         } else {
@@ -28,7 +28,7 @@ function Queue () {
         }
     }
     
-    function unsubscribe (topic) {
+    let unsubscribe = (topic) => {
         delete queue[topic];
         delete topics[topic];
     }
